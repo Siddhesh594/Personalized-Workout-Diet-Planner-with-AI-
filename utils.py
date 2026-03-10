@@ -2,8 +2,7 @@
 import google.genai as genai
 
 # Initializing Gemini client with  API key
-client = genai.Client(api_key = "AIzaSyALgrccl_g5Skuoazpm9Kz9VTm3IRJOj80")
-
+client = genai.Client(api_key = "AIzaSyADjY5dmUrlBe63EBMQ3sliTE9Is38I_aY")
 def generate_fitness_plan(user_input: str) -> str:
     """
     Generates a personalized AI fitness plan using Google Gemini API.
@@ -16,6 +15,7 @@ def generate_fitness_plan(user_input: str) -> str:
         return response.text
     except Exception as e:
         return f"⚠️ Error generating fitness plan: {e}"
+
 
 
 
