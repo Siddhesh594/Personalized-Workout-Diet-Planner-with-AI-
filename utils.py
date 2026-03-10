@@ -1,16 +1,14 @@
 # utils.py
 from openai import OpenAI
+import os
 
-# Initialize OpenAI client with your API key
-client = OpenAI(api_key="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")
+client = OpenAI(api_key=os.getenv("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"))
 
-def generate_fitness_plan(user_input: str) -> str:
-    """
-    Generates a personalized AI fitness plan using ChatGPT.
-    """
+def generate_fitness_plan(user_input: str):
+
     try:
         response = client.chat.completions.create(
-            model="gpt-4o-mini",   # fast and cheap model
+            model="gpt-4o-mini",
             messages=[
                 {"role": "system", "content": "You are a professional fitness trainer."},
                 {"role": "user", "content": user_input}
@@ -21,4 +19,4 @@ def generate_fitness_plan(user_input: str) -> str:
         return response.choices[0].message.content
 
     except Exception as e:
-        return f"⚠️ Error generating fitness plan: {e}"
+        return f"Error: {e}"
