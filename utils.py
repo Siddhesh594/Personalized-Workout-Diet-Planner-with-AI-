@@ -1,22 +1,24 @@
 # utils.py
-import google.genai as genai
+from openai import OpenAI
 
-# Initializing Gemini client with  API key
-client = genai.Client(api_key = "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")
+# Initialize OpenAI client with your API key
+client = OpenAI(api_key="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")
+
 def generate_fitness_plan(user_input: str) -> str:
     """
-    Generates a personalized AI fitness plan using Google Gemini API.
+    Generates a personalized AI fitness plan using ChatGPT.
     """
     try:
-        response = client.models.generate_content(
-            model="gemini-2.0-flash",  # or gemini-2.5-flash if available
-            contents=user_input
+        response = client.chat.completions.create(
+            model="gpt-4o-mini",   # fast and cheap model
+            messages=[
+                {"role": "system", "content": "You are a professional fitness trainer."},
+                {"role": "user", "content": user_input}
+            ],
+            max_tokens=500
         )
-        return response.text
+
+        return response.choices[0].message.content
+
     except Exception as e:
         return f"⚠️ Error generating fitness plan: {e}"
-
-
-
-
-
